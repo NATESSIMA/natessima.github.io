@@ -1,0 +1,1 @@
+document.querySelector("body").innerHTML="<h2>slushai luchshe</h2>"

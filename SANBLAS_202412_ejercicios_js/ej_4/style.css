@@ -1,0 +1,15 @@
+.room {
+    margin-left: 25%;
+    width: 40%;
+    height: 300px;
+    border: 5%;
+    border-radius: 10px;
+    border-color: black;
+}
+.image {
+transition: all 1 ease-in-out;
+width: 30%;
+height: 80%;
+padding: 2%;
+}
+.text{margin-left: auto;}

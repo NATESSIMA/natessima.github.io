@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+<label for="precio-max"> precio max</label>
+<input type="range" id="precio-maximo" min="10" max="5000">
+<span id="resultado"> 5000 </span>
+ </div>
+ <div>
+<img id="gato" width="10px" src="image.png">
+
+
+ </div>
+</body>
+</html>
+<script>
+document.querySelector("#precio-maximo").addEventListener("input", () =>{
+    let cost = document.querySelector("#precio-maximo").value;
+    document.querySelector("#resultado").textContent = cost;
+    //cambiamos el texto del span resultado
+document.getElementById("gato").setAttribute("width", cost+"px")
+});
+
+
+</script>

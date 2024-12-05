@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale">
+</head>
+
+<body>
+<div><h1> Titulo Nivel 1 </h1></div>
+<div><h2> Titulo Nivel 2 </h2></div>
+<div id="div-ct"><button id="button-1">Cambiar Tituli 1</button></div>
+<div><button>Cambiar Tituli 1</button></div>
+</body>
+</html>
+<script>
+    function saludar() { 
+        alert("Hola");
+    }   
+    function cambiar () {
+        document.querySelector("h1").innerHTML = "Texto cambioado" ;
+    }
+document.getElementById("button-1").addEventListener ("click" , saludar) ;
+document.querySelector("h1").addEventListener ("mouseenter" , cambiar);
+</script>
