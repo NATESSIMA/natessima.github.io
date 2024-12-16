@@ -1,0 +1,53 @@
+body {
+    background-color: #ececc7;
+    /* Бежевый фон для всей страницы */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ececc7;
+    /* Для контрастного фона контейнера */
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.filter {
+    background-color: #4e4f51;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.filter:hover {
+    background-color: #0056b3;
+}
+
+.peliculas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.pelicula {
+    border: 1px solid #a35454;
+    padding: 10px;
+    text-align: center;
+}
+
+.pelicula img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
