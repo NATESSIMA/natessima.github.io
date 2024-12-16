@@ -1,11 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>peliculas</title>
+   <style>
+.container { 
+    width: 80%;
+    margin: 0 auto;
+}
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap:20 px;
+}
+.movies{
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+}
+ </style>
 </head>
 <body>
-    <h1>wsde2fwecwedf</h1>
+    <h1>peliculas</h1>
+    <div class="filters">
+    <button class="filter" data-filter="titulo">titulo</button>;
+    <button class="filter" data-filter="año">año</button>;
+    <button class="filter" data-filter="ordenar">ordenar</button>;
+    <button class="filter" data-filter="genero">genero</button>;
+    </div>
+    <div class="peliculas">
+        <div class="pelicula" 
+        data-titulo =" pelicula 1" ,
+        data-año="2021",
+        data-actor="actor 1",
+        data-genero="accion",>
+        <h2>Pelicula 1</h2>
+        <p>Año: 2021</p>
+        <p>Actor: actor 1</p>
+    </div>
+
+ <div class="peliculas">
+        <div class="pelicula" 
+        data-titulo =" pelicula 2" ,
+        data-año="2022",
+        data-actor="actor 2",
+        data-genero="accion",>
+        <h2>Pelicula 2</h2>
+        <p>Año: 2022</p>
+        <p>Actor: actor 2</p>
+    </div>
+    <div class="peliculas">
+        <div class="pelicula" 
+        data-titulo =" pelicula 3" ,
+        data-año="2023",
+        data-actor="actor 3",
+        data-genero="accion",>
+        <h2>Pelicula 3</h2>
+        <p>Año: 2023</p>
+        <p>Actor: actor 3</p>
+    </div>
+    <div class="peliculas">
+        <div class="pelicula" 
+        data-titulo =" pelicula 4" ,
+        data-año="2024",
+        data-actor="actor 4",
+        data-genero="accion",>
+        <h2>Pelicula 4</h2>
+        <p>Año: 2024</p>
+        <p>Actor: actor 4</p>
+    </div>
+
+ <div class="peliculas">
+        <div class="pelicula" 
+        data-titulo =" pelicula 5" ,
+        data-año="2021",
+        data-actor="actor 5",
+        data-genero="accion",>
+        <h2>Pelicula 5</h2>
+        <p>Año: 2025</p>
+        <p>Actor: actor 5</p>
+    </div>
+    </div>
+    
+   <script>
+document.querySelectorAll('filter').forEach(button=>{
+    button.addEventListener('click')})
+
+
+
+
+   </script>
 </body>
 </html>
