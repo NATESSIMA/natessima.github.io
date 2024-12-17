@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="styles/style.css">
     <script src="/scripts/app.js"></script>
     <script src="/scripts/myhttp.js"></script>
+    <script src="/gestor-eventos.js"></script>
+    <title>super pelis</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PELICULAS</title>
@@ -19,20 +21,31 @@
                 <button class="filter" data-filter="titulo">TITULO</button>
                 <input type="text" class="filter-input" data-filter="titulo" placeholder="Buscar por Titulo">
             </div>
-            <div class="filter-group">
+ <div class="filter-group">
                 <button class="filter" data-filter="año">AñO</button>
                 <input type="text" class="filter-input" data-filter="año" placeholder="Buscar por Año">
             </div>
-            <div class="filter-group">
+<div class="filter-group">
                 <button class="filter" data-filter="ordenar">ORDENAR</button>
                 <input type="text" class="filter-input" data-filter="ordenar" placeholder="Buscar por Ordenar">
             </div>
-            <div class="filter-group">
+ <div class="filter-group">
+                <button class="filter" data-filter="actor">Actor</button>
+                <input type="text" class="filter-input" data-filter="actor" placeholder="Buscar por actor">
+            </div>
+<div class="filter-group">
                 <button class="filter" data-filter="genero">GENERO</button>
+                <select id="genero">
+                <option value="drama">drama</option>
+                <option value="terror">terror</option>
+                <option value="Criminal">criminal</option>
+                <option value="Histoty">history</option>
                 <input type="text" class="filter-input" data-filter="genero" placeholder="Buscar por Género">
+            </select>
             </div>
         </div>
-        <div class="peliculas">
+ <div class="peliculas">
+
             <div class="pelicula" data-titulo="Pelicula 1" data-año="año 1" data-actor="Actor 1" data-genero="Acción">
                 <img src="images/PELICULA 1.jpg" alt="Pelicula 1">
                 <h2>The Shawshank Redemption</h2>
@@ -109,7 +122,15 @@
                 });
             });
         });
-    </script>
+   </script>
+    <script src="myhttp.js"> </script>
+    <script>
+
+
+ 
+
+</script>
+
 </body>
 
 </html>

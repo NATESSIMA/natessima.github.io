@@ -15,11 +15,12 @@ nuevoContenido.appendChild(nuevoTitulo);
 
 const nuevoParrafoDirector= document.createElement("p");
 const nuevaNegrita=document.createElement("strong");
-nuevoContenido.appendChild(nuevoParrafodirector)
-nuevaCard.appendChild(nuevoParrafoDirector);
-nuevoParrafoDirector.textContent=pelicula.Director;
-nuevoContenido.appendChild()
+nuevoParrafoDirector.appendChild(nuevaNegrita);
+nuevaNegrita.textContent.content="Director";
+nuevoContenido.appendChild(nuevoParrafoDirector);
 
+const textoDirector=document.createTextNode(pelicula.Director)
+nuevoParrafoDirector.appendChild(textoDirector);
 
 
 
