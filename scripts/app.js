@@ -1,47 +1,43 @@
-const url = 'https://github.com/NATESSIMA/natessima.github.io/blob/main/main/database/movies-250.json';
-function generateCard(pelicula){
+// Предположим, что переменная `movies` содержит данные о фильмах, полученные через fetch.
+function createPosters(movies) {
+    console.log(movies)
+    const container = document.getElementById('peliculasContainer'); // Контейнер, в котором будут отображаться постеры.
+    container.innerHTML = ''; // Очистим контейнер перед добавлением новых постеров.
 
-const nuevaCard= document.createElement("div");//crea un elemento 
-const nuevaIMG= document.createElement("img");
-nuevaIMG.setAttribute("src", pelicula.Poster);
-nuevaIMG.setAttribute("alt", `Poster de la pelicula ${pelicula.Title}`);
+    // Для каждого фильма создаем постер.
+    movies.forEach(movie => {
+        const movieDiv = document.createElement('div');
+        movieDiv.className = 'pelicula'; // Класс для каждого постера
 
-const nuevoContenido=document.createElement("div");
-nuevaCard.appendChild(nuevaIMG);
-nuevoContenido.setAttribute("class","card-content");
-nuevaCard.appendChild(nuevoContenido);
-nuevoTitulo.textContent=pelicula.Title;
-nuevoContenido.appendChild(nuevoTitulo);
+        // Создаем постер фильма с изображением
+        movieDiv.innerHTML = `
+            <img src="${movie.image}" alt="${movie.title}" class="movie-poster">
+            <h3>${movie.title}</h3>
+        `;
 
-const nuevoParrafoDirector= document.createElement("p");
-const nuevaNegrita=document.createElement("strong");
-nuevoParrafoDirector.appendChild(nuevaNegrita);
-nuevaNegrita.textContent.content="Director";
-nuevoContenido.appendChild(nuevoParrafoDirector);
-
-const textoDirector=document.createTextNode(pelicula.Director)
-nuevoParrafoDirector.appendChild(textoDirector);
-
-
-
-
-
-    document.createElement("div");//crea un elemento de tipo div
-     const peliculas =data. movies;
-    for (let i=0;i<peliculas.length;i++){
-        console.log("duracion:"+peliculas[i].Runtime);
-    }
-    peliculas.forEach(pelicula=>{
-        console.log(pelicula.Title);
+        // Добавляем постер в контейнер
+        container.appendChild(movieDiv);
     });
-    for (pelicula of peliculas)(
-        console.log("director"+ pelicula.director));
-    for (atributo in peliculas[0]){
-        console.log(atributo,peliculas[0][atributo]);
-    }
-       peliculas.forEach(pelicula=>{
-        generateCard(pelicula);
-       })   
 }
 
-DocumentFragment(URL, processMovie);
+// Используем правильный raw URL для доступа к JSON файлу на GitHub
+const URL = "https://raw.githubusercontent.com/NATESSIMA/natessima.github.io/main/main/database/movies-250.json";
+
+// Выполняем запрос fetch
+fetch(URL)
+    .then(response => {
+        // Проверяем, если ответ успешный (status 200)
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        // Преобразуем ответ в JSON
+        return response.json();
+    })
+    .then(data => {
+        // Выводим данные в консоль (или обрабатываем их)
+        createPosters(data)
+    })
+    .catch(error => {
+        // Ловим ошибки (например, если нет соединения или проблемы с запросом)
+        console.error('Ошибка при загрузке данных:', error);
+    });
