@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Películas</title>
+    <script src="/scripts/myhttp.js"></script>
+    <script src="/scripts/app.js"></script>
 </head>
 
 <body>
@@ -28,59 +30,10 @@
                 <input type="text" class="filter-input" data-filter="genero" placeholder="Buscar por Género">
             </div>
         </div>
-        <h1 id="nah">ananana</h1>
+        <h1 id="nah"></h1>
     </div>
     <div id="peliculasContainer">qweasdwacawcawdfwa</div>
 
-    <script>
-        function createPosters(movies) {
-            console.log(movies)
-            console.log(typeof(movies))
-            const container = document.getElementById('peliculasContainer'); // Contenedor donde se mostrarán los pósters.
-            container.innerHTML = ''; // Limpiamos el contenedor antes de agregar nuevos pósters.
-
-            // Para cada película, creamos un póster.
-            movies.forEach(movie => {
-                const movieDiv = document.createElement('div');
-                movieDiv.className = 'pelicula'; // Clase para cada póster
-
-                // Creamos el póster de la película con su imagen
-                movieDiv.innerHTML = `
-                <img src="${movie.Poster}" alt="${movie.Title}" class="movie-poster">
-                <h3>${movie.Title}</h3>
-                `;
-
-                // Agregamos el póster al contenedor
-                container.appendChild(movieDiv);
-            });
-        }
-
-        const URL = "https://raw.githubusercontent.com/NATESSIMA/natessima.github.io/main/main/database/movies-250.json";
-
-        fetch(URL)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Log the structure of the data to inspect it
-                console.log('Fetched data:', data);
-
-                // If 'data' is not an array, try to access the array inside it
-                if (Array.isArray(data)) {
-                    createPosters(data);
-                } else if (data.movies && Array.isArray(data.movies)) {
-                    createPosters(data.movies); // Assuming the movies are inside a 'movies' property
-                } else {
-                    console.error('Data is not in the expected array format');
-                }
-            })
-            .catch(error => {
-                console.error('Error while loading data:', error);
-            });
-    </script>
 </body>
 
 </html>

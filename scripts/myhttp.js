@@ -1,4 +1,3 @@
-// Используем правильный raw URL для доступа к JSON файлу на GitHub
 const URL = "https://raw.githubusercontent.com/NATESSIMA/natessima.github.io/main/main/database/movies-250.json";
 
 // Выполняем запрос fetch
@@ -12,8 +11,8 @@ fetch(URL)
         return response.json();
     })
     .then(data => {
-        // Выводим данные в консоль (или обрабатываем их)
-        return data
+        data = data.movies;
+        createPosters(data)
     })
     .catch(error => {
         // Ловим ошибки (например, если нет соединения или проблемы с запросом)
