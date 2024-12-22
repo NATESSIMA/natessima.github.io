@@ -1,86 +1,54 @@
+<!DOCTYPE html>
 <html lang="es">
-<link rel="stylesheet" href="styles/style.css">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Películas</title>
+    <!--<для корректного отображения с мобильных>-->
+    <link rel="stylesheet" href="/main/styles/style.css">
+    <!--<подключаем стили из фвйла цсс>-->
+    <title>Super Pelis</title>
 </head>
 
 <body>
-    <div class="fbi">
-        <h1>Películas</h1>
-        <div class="filters">
-            <div class="filter-group">
-                <button class="filter" data-filter="titulo">Titulo</button>
-                <input type="text" class="filter-input" data-filter="titulo" placeholder="Buscar por Titulo">
-            </div>
-            <div class="filter-group">
-                <button class="filter" data-filter="año">Año</button>
-                <input type="text" class="filter-input" data-filter="año" placeholder="Buscar por Año">
-            </div>
-            <div class="filter-group">
-                <button class="filter" data-filter="actor">Actor</button>
-                <input type="text" class="filter-input" data-filter="actor" placeholder="Buscar por Actor">
-            </div>
-            <div class="filter-group">
-                <button class="filter" data-filter="genero">Género</button>
-                <input type="text" class="filter-input" data-filter="genero" placeholder="Buscar por Género">
+    <div id="div-formulario">
+        <input type="text" id="t-titulo" placeholder="Título">
+        <button id="b-titulo">Buscar</button>
+        <input type="text" id="t-actor" placeholder="Actor">
+        <!--<<input type="text" id="t-titulo" placeholder="Título"> — поле ввода для поиска по названию. placeholder — подсказка внутри поля.
+        <button id="b-titulo">Buscar</button> — кнопка поиска для поля названия. При нажатии запускается поиск.-->
+        <button id="b-actor">Buscar</button>
+        <select id="s-genero">
+            <!--<option value="drama">Drama</option>-->
+        </select>
+        <button id="b-genero">Buscar</button>
+        <input type="number" id="t-anyo" placeholder="Año" min="1900" max="2030">
+        <button id="b-anyo">Buscar</button>
+
+        <label for="r-asc">Duración ascendente</label>
+        <input type="radio" id="r-asc" name="ordenar" value="ascendente" checked>
+        <label for="r-desc">Duración descendente</label>
+        <input type="radio" id="r-desc" name="ordenar" value="descendente">
+        <button id="b-ordenar">Ordenar</button>
+        <span id="contador"></span>
+    </div>
+    <div id="container">
+        <!-- Tarjeta 1 -->
+        <!--
+        <div class="card">
+            <img src="https://via.placeholder.com/300x450" alt="Póster de película">
+            <div class="card-content">
+                <h3>El Padrino</h3>
+                <p><strong>Director:</strong> Francis Ford Coppola</p>
+                <p><strong>Año:</strong> 1972</p>
+                <p><span class="genre">Género:</span> Drama, Crimen</p>
             </div>
         </div>
-        <h1 id="nah">ananana</h1>
+        -->
     </div>
-    <div id="peliculasContainer">qweasdwacawcawdfwa</div>
-
-    <script>
-        function createPosters(movies) {
-            console.log(movies)
-            console.log(typeof(movies))
-            const container = document.getElementById('peliculasContainer'); // Contenedor donde se mostrarán los pósters.
-            container.innerHTML = ''; // Limpiamos el contenedor antes de agregar nuevos pósters.
-
-            // Para cada película, creamos un póster.
-            movies.forEach(movie => {
-                const movieDiv = document.createElement('div');
-                movieDiv.className = 'pelicula'; // Clase para cada póster
-
-                // Creamos el póster de la película con su imagen
-                movieDiv.innerHTML = `
-                <img src="${movie.Poster}" alt="${movie.Title}" class="movie-poster">
-                <h3>${movie.Title}</h3>
-                `;
-
-                // Agregamos el póster al contenedor
-                container.appendChild(movieDiv);
-            });
-        }
-
-        const URL = "https://raw.githubusercontent.com/NATESSIMA/natessima.github.io/main/main/database/movies-250.json";
-
-        fetch(URL)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Log the structure of the data to inspect it
-                console.log('Fetched data:', data);
-
-                // If 'data' is not an array, try to access the array inside it
-                if (Array.isArray(data)) {
-                    createPosters(data);
-                } else if (data.movies && Array.isArray(data.movies)) {
-                    createPosters(data.movies); // Assuming the movies are inside a 'movies' property
-                } else {
-                    console.error('Data is not in the expected array format');
-                }
-            })
-            .catch(error => {
-                console.error('Error while loading data:', error);
-            });
-    </script>
 </body>
 
 </html>
+<script src="/scripts/myhttp.js"></script>
+<script src="/scripts/app.js"></script>
+<script src="/scripts/gestor_eventos.js"></script>
