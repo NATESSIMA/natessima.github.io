@@ -29,6 +29,9 @@ document.querySelector("#s-genero").addEventListener("change", () => {
 document.querySelector("#b-anyo").addEventListener("click", () => {
     filtrarPeliculas("#t-anyo", "Year");
 });
+document.querySelector("#b-director").addEventListener("click", () => {
+    filtrarPeliculas("#t-director", "Director");
+});
 
 /**
  * Función de búsqeuda 
