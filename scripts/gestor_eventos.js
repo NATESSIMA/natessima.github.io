@@ -58,3 +58,52 @@ getMovies(movies=>{
     displayMovies(filteredMovies);
 })
         })
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const filterInputs = document.querySelectorAll(".filter-input");
+    const peliculasContainer = document.getElementById("peliculasContainer");
+
+    const renderPeliculas = (peliculasFiltradas) => {
+        peliculasContainer.innerHTML = "";
+        if (peliculasFiltradas.length === 0) {
+            peliculasContainer.innerHTML = "<p>No se encontraron resultados.</p>";
+            return;
+        }
+        peliculasFiltradas.forEach((pelicula) => {
+            const div = document.createElement("div");
+            div.classList.add("pelicula");
+            div.innerHTML = `
+                <h3>${pelicula.titulo}</h3>
+                <p><strong>Año:</strong>${pelicula.año}</p>
+                <p><strong>Actor:</strong>${pelicula.actor}</p>
+                <p><strong>Género:</strong>${pelicula.genero}</p>
+            `;
+            peliculasContainer.appendChild(div);
+        });
+    };
+
+    const filtrarPeliculas = () => {
+        let peliculasFiltradas = peliculas;
+
+        filterInputs.forEach((input) => {
+            const filterType = input.dataset.filter;
+            const filterValue = input.value.trim().toLowerCase();
+
+            if (filterValue) {
+                peliculasFiltradas = peliculasFiltradas.filter((pelicula) =>
+                    pelicula[filterType]?.toString().toLowerCase().includes(filterValue)
+                );
+            }
+        });
+
+        renderPeliculas(peliculasFiltradas);
+    };
+
+    filterInputs.forEach((input) => {
+        input.addEventListener("input", filtrarPeliculas);
+    });
+
+    // Mostrar todas las películas al cargar
+    renderPeliculas(peliculas);
+});
