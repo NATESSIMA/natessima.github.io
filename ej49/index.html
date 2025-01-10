@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <h1>Calculadora</h1>
+    <form id="calculatorForm">
+        <label for="number1">Número 1:</label>
+        <input type="text" id="number1" name="number1" required>
+        
+        <label for="number2">Número 2:</label>
+        <input type="text" id="number2" name="number2" required>
+        
+        <input type="button" value="Sumar" onclick="sumar()">
+        <input type="button" value="Restar" onclick="restar()">
+    </form>
+    <div id="result"></div>
+    <script src="parte.js"></script> 
+</body>
+</html>

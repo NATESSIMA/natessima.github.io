@@ -1,20 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Quiz Interactivo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="div-portada" class="pagina">Portada
+    <!-- Pantalla inicial -->
+    <div id="start-screen">
+        <h1>Bienvenido al Quiz</h1>
+        <p>Presiona el botón para comenzar.</p>
         <button id="b-comenzar">Comenzar</button>
     </div>
-    <div id = "div-pregunta-1"class="pagina">Pregunta 1</div>
-    <div id = "div-pregunta-2"class="pagina">Pregunta 2</div>
-    <div id = "div-pregunta-3"class="pagina">Pregunta 3</div>
-    <div id="div-resultado" class="pagina">Resultado</div>
-    
+
+    <!-- Contenedor del quiz -->
+    <div id="quiz-container" class="hidden">
+        <h2 id="question">Pregunta aquí</h2>
+        <div id="answers"></div>
+        <p>Tiempo restante: <span id="s-tiempo">5</span> segundos</p>
+    </div>
+
+    <!-- Resultado final -->
+    <div id="result" class="hidden">
+        <p id="result-message"></p>
+        <p id="result-time"></p>
+    </div>
+
+    <script src="quiz.js"></script>
 </body>
 </html>
-<script src="quiz.js"></script>

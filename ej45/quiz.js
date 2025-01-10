@@ -1,4 +1,3 @@
-
 const questions = [
     {
         question: "¿Cuál es la capital de España?",
@@ -19,10 +18,10 @@ const questions = [
 
 let currentQuestionIndex = 0;
 let startTime;
-let questionStartTime;
-let timer;
+let countdownInterval;
+const TIEMPO_RESPUESTA = 5;
 
-document.getElementById('start-button').addEventListener('click', function() {
+document.getElementById('b-comenzar').addEventListener('click', function () {
     startTime = new Date();
     document.getElementById('start-screen').classList.add('hidden');
     document.getElementById('quiz-container').classList.remove('hidden');
@@ -39,7 +38,8 @@ function loadQuestion() {
     document.getElementById('question').innerText = questionObj.question;
 
     const answersDiv = document.getElementById('answers');
-    answersDiv.innerHTML = "";
+    answersDiv.innerHTML = ""; // Limpia respuestas previas
+
     questionObj.answers.forEach((answer, index) => {
         const button = document.createElement('button');
         button.innerText = answer;
@@ -47,34 +47,42 @@ function loadQuestion() {
         answersDiv.appendChild(button);
     });
 
-    // Начинаем таймер
-    questionStartTime = new Date();
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-        endQuiz("Время на ответ истекло. Тест завершен.");
-    }, 5000);
+    startCountdown();
 }
 
 function checkAnswer(selectedIndex) {
-    clearTimeout(timer); // Останавливаем таймер
+    clearInterval(countdownInterval); // Detiene el temporizador
+
     const questionObj = questions[currentQuestionIndex];
     if (selectedIndex === questionObj.correct) {
         currentQuestionIndex++;
         loadQuestion();
     } else {
-        endQuiz("Ответ неверный. Тест завершен.");
+        endQuiz("Respuesta incorrecta. Test terminado.");
     }
+}
+
+function startCountdown() {
+    let tiempo = TIEMPO_RESPUESTA;
+    document.getElementById('s-tiempo').innerText = tiempo;
+
+    clearInterval(countdownInterval); // Limpia temporizadores previos
+    countdownInterval = setInterval(() => {
+        tiempo--;
+        document.getElementById('s-tiempo').innerText = tiempo;
+
+        if (tiempo <= 0) {
+            clearInterval(countdownInterval);
+            endQuiz("Se acabó el tiempo. Test terminado.");
+        }
+    }, 1000);
 }
 
 function endQuiz(message) {
     const endTime = new Date();
-    const timeElapsed = (endTime - startTime) / 1000;
+    const timeElapsed = ((endTime - startTime) / 1000).toFixed(2);
     document.getElementById('quiz-container').classList.add('hidden');
-    document.getElementById('result').innerText = `${message} Время, прошедшее с начала теста: ${timeElapsed} секунд.`;
+    document.getElementById('result-message').innerText = message;
+    document.getElementById('result-time').innerText = `Tiempo total: ${timeElapsed} segundos.`;
     document.getElementById('result').classList.remove('hidden');
 }
-
-window.onload = function() {
-    document.getElementById('quiz-container').classList.add('hidden');
-    document.getElementById('result').classList.add('hidden');
-};
