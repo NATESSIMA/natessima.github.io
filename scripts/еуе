@@ -1,0 +1,210 @@
+let peliculas;
+let peliculasFiltradas;
+
+
+function processMovie(data) {
+    peliculas = data.movies;
+    //создаем ссылку на тот же самый массив, что и peliculas.Переменные (peliculasFiltradas и peliculas) взаимосвязаны. меняем одну меняется вторая
+    peliculasFiltradas = Array.from(peliculas); //создаем массив который  копирует все из исходного массива peliculas.
+    // изменения в этом массиве не повлияют на исходный
+    generarDesplegableGenero(peliculas);
+
+    //Вызов функции, создает выпадающий список (или другой элемент интерфейса),в данном случае список жанров
+    //  в котором отображаются жанры фильмов из массива peliculas. функция generarDesplegableGenero
+    /*
+
+    //способ перебора массива с использованием индекса. Он полезен, если вам нужно работать с индексами массива. 
+    // В данном примере выводится продолжительность фильма (Runtime) для каждого элемента в массиве peliculas.
+    for (let i=0;i<peliculas.length;i++){
+        console.log("Duration:" + peliculas[i].Runtime);
+    }
+
+    //Цикл for...of позволяет перебирать элементы массива без явного использования индексов.
+    //  Это более чистый и удобный способ, если вам не нужно работать с индексами, 
+    // а просто нужно получить доступ к каждому элементу. 
+    // В примере выводится имя режиссера (Director) каждого фильма.
+    for (pelicula of peliculas) {
+        console.log("Director:" + pelicula.Director);
+    }
+    //Метод forEach выполняет функцию для каждого элемента массива. 
+    // Этот метод удобен для простого перебора, 
+    // когда вам не нужно остановить цикл или работать с индексами.
+    //  В этом примере выводится название фильма (Title) для каждого элемента.
+    peliculas.forEach(pelicula => {
+        console.log("Título:" + pelicula.Title);
+    });
+    //Цикл for...in используется для перебора свойств объекта. В данном примере вы перебираете все свойства первого объекта в массиве peliculas.
+    //  Для каждого свойства выводится его имя и значение. 
+    // Этот способ полезен для работы с объектами, когда вам нужно получить все ключи и значения.
+    for (atributo in peliculas[0]){
+        console.log(atributo, peliculas[0][atributo]);
+    }
+    */
+    peliculas.forEach(pelicula => {
+        generateCard(pelicula);
+    });
+}
+
+function generateCard(pelicula) {
+    //фрагмент кода обновляет элемент с id contador. Он отображает количество фильмов в массиве peliculasFiltradas. Когда вызывается функция generateCard,
+    //обновляет этот счетчик, показывает количество фильмов, которые должны быть отображены
+    document.querySelector("#contador").textContent = peliculasFiltradas.length;
+
+    //создается новый элемент div, который будет использоваться для отображения карточки фильма.
+    //элемент получает класс card, чтобы на него можно было применить CSS-стили.
+    const nuevaCard = document.createElement("div");
+    nuevaCard.setAttribute("class", "card");
+
+    //После того как изображение создано и его атрибуты установлены, оно добавляется в карточку фильма (nuevaCard).
+    const nuevaImg = document.createElement("img");
+    //создаем новый элемент HTML img. Это элемент, будет отображать изображение. 
+    // Мы будем использовать его для отображения постера фильма.
+
+    nuevaImg.setAttribute("src", pelicula.Poster);
+    //Этот код устанавливает атрибут src для элемента img. 
+    // Атрибут src указывает путь к изображению. объект pelicula содержит свойство Poster, которое содержит путь или URL к изображению постера. 
+    // Например, если pelicula.Poster содержит строку "images/matrix-poster.jpg", то это изображение будет отображено на странице.
+    nuevaImg.setAttribute("alt", `Póster de la película ${pelicula.title}`);
+    //Атрибут alt задает текст, который будет отображаться, если изображение не загрузилось (например, из-за ошибки с файлом или сети). Это также помогает улучшить доступность для людей, использующих экранные читалки. В данном случае, 
+    // текст альтернативного описания будет формироваться динамически, 
+    // включив название фильма
+    nuevaCard.appendChild(nuevaImg);
+    //После того как изображение создано и его атрибуты установлены, оно добавляется в карточку фильма (nuevaCard). 
+    //  означает, что изображение теперь будет частью карточки и отображаться на странице.
+
+    const nuevoContenido = document.createElement("div");
+    // В данном случае, мы создаем новый div, 
+    // который будет содержать дополнительный контент внутри карточки фильма (например, описание фильма, актеров и т. д.).
+    nuevoContenido.setAttribute("class", "card-content"); //Здесь мы устанавливаем атрибут class для только что созданного div. 
+    // Атрибут class задает CSS класс для элемента, что позволяет стилям применяться к этому элементу. 
+    // В данном случае, класс card-content будет использоваться для оформления этого блока контента в карточке фильма. 
+
+    nuevaCard.appendChild(nuevoContenido)
+        //Этот код добавляет только что созданный div с классом card-content 
+        // в родительский элемент nuevaCard (который представляет собой карточку фильма). 
+        // Новый блок содержимого (nuevoContenido) будет вложен в карточку фильма и отображен на странице.
+
+    //фрагмент кода отвечает за создание и добавление элемента с заголовком (например, названием фильма) в карточку.
+    const nuevoTitulo = document.createElement("h3");
+    //Здесь создается новый HTML-элемент <h3>. 
+    // Этот элемент представляет собой заголовок третьего уровня,
+    // который обычно используется для выделения важной информации на странице, в том числе названий. В нашем случае это будет название фильма.
+    nuevoTitulo.textContent = pelicula.Title;
+    //элемент <h3> был создан, устанавливается его текстовое содержимое.Используем textContent для того, чтобы присвоить название фильма,
+    //  которое хранится в объекте pelicula. Например, если объект pelicula имеет свойство Title
+    nuevoContenido.appendChild(nuevoTitulo);
+    //новый элемент <h3>, который содержит название фильма,
+    //  добавляется в ранее созданный блок nuevoContenido (контейнер для содержимого карточки).
+    //  Это позволяет заголовку отобразиться внутри карточки фильма.
+
+    //ДИРЕКТОР(РЕЖИСЕР)
+    //фрагмент кода создаёт элемент параграфа с информацией о директоре фильма и добавляет его в карточку фильма.
+    const nuevoParrafoDirector = document.createElement("p");
+    //оздаем новый элемент <p>, который будет использоваться для отображения информации о директоре фильма. 
+    const nuevaNegrita = document.createElement("strong");
+    //Мы создаём элемент <strong>, который будет использоваться для выделения части текста жирным шрифтом.текст "Director:"
+    nuevoParrafoDirector.appendChild(nuevaNegrita);
+    //элемент nuevaNegrita (который является элементом <strong>, содержащим текст "Director: ") 
+    //добавляется как дочерний элемент в nuevoParrafoDirector (который является параграфом <p>).
+    nuevaNegrita.textContent = "Director: ";
+    //Устанавливаем текст для элемента <strong>. Он будет отображать "Director: "
+    nuevoContenido.appendChild(nuevoParrafoDirector);
+    //Элемент <p> (переменная nuevoParrafoDirector), был создан ранее и содержит тег <strong> с текстом "Director: ", 
+    // добавляется как дочерний элемент в контейнер nuevoContenido.
+    const textoDirector = document.createTextNode(pelicula.Director)
+        //Создаётся текстовый узел, содержащий имя режиссёра фильма (pelicula.Director). Например, если имя режиссёра — "Francis Ford Coppola", то переменная textoDirector будет содержать этот текст.
+        //Чем текстовый узел отличается от элемента?
+        //Текстовый узел — это просто строка текста, которая добавляется в DOM как часть элемента, а не как самостоятельный HTML-элемент.
+    nuevoParrafoDirector.appendChild(textoDirector);
+    //Эта строка завершает добавление текста (имени режиссёра) в элемент <p>, который уже содержит жирное выделение "Director: ".
+
+    //ГОД
+    const nuevoParrafoAnyo = document.createElement("p");
+    //Создание параграфа <p> для года:
+    const nuevaNegritaAnyo = document.createElement("strong");
+    //Создание элемента <strong> для выделения текста:
+    nuevoParrafoAnyo.appendChild(nuevaNegritaAnyo);
+    //Добавление <strong> в <p>:
+    nuevaNegritaAnyo.textContent = "Año: ";
+    //Элемент <strong> вставляется в параграф <p>. На данный момент параграф выглядит так: html <p><strong></strong></p>
+    nuevoContenido.appendChild(nuevoParrafoAnyo);
+    //Добавление текста "Año: " в <strong>:
+    const textoAnyo = document.createTextNode(pelicula.Year)
+        //Устанавливается текст "Año: " внутри <strong>. Теперь HTML будет выглядеть так: html<p><strong>Año: </strong></p>
+    nuevoParrafoAnyo.appendChild(textoAnyo);
+    //Добавление <p> в родительский контейнер:
+
+    //ЖАНДР
+    const nuevoParrafoGenero = document.createElement("p");
+    //Создание нового параграфа <p> для жанра:
+    const nuevoSpanGenero = document.createElement("span");
+    //Создание элемента <span> для выделения текста:
+    // Создаётся элемент <span>, чтобы можно было стилизовать текст "Género:" через CSS.
+    nuevoSpanGenero.setAttribute("class", "genre");
+    //Присвоение класса genre элементу <span>:Устанавливается класс genre для <span>, 
+    // для стилей через CSS (изменить шрифт, цвет и т. д.).
+    nuevoSpanGenero.textContent = "Género: ";
+    //Добавление текста "Género:" в <span>:Устанавливается текст "Género: " внутри <span>. 
+    // После этого <span> выглядит так:html<span class="genre">Género: </span>
+    nuevoParrafoGenero.appendChild(nuevoSpanGenero);
+    //Добавление <span> в параграф <p>:
+    nuevoParrafoGenero.appendChild(document.createTextNode(pelicula.Genre));
+    //Вставляется <span> в параграф <p>.
+    //  HTML выглядит так:html<p><span class="genre">Género: </span></p>
+    nuevoContenido.appendChild(nuevoParrafoGenero);
+    //Добавление текстового узла с жанром фильма
+
+    //Último paso: Agregar al contenedor la ficha recién creada
+    document.querySelector("#container").appendChild(nuevaCard);
+    //Добавление параграфа в контейнер
+}
+//Этот код отвечает за создание списка  жанров фильмов на основе данных, которые передаются в виде массива объектов peliculas
+
+function generarDesplegableGenero(peliculas) {
+    //
+    let setGeneros = new Set();
+    //Создание множества для хранения уникальных жанров:
+    peliculas.forEach(pelicula => {
+        let generos = pelicula.Genre.split(',').map(genero => genero.trim());
+        generos.forEach(genero => setGeneros.add(genero));
+    });
+    //Итерация по массиву фильмовю.Свойство pelicula.Genre содержит строку с жанрами, например: "Drama, Crime, Thriller".split(',')
+    // разделяет эту строку на массив строк по запятой: ["Drama", "Crime", "Thriller"].map(genero => genero.trim()) 
+    // удаляет лишние пробелы вокруг каждого элемента массива, приводя строки к виду: ["Drama", "Crime", "Thriller"].
+    //<option value="drama">Drama</option>
+    let arrayGeneros = Array.from(setGeneros)
+        //setGeneros — это множество (Set) жанров. Множество содержит жанры, собранные на предыдущем этапе. 
+    arrayGeneros.sort().forEach(genero => {
+        //Сортировка массива arrayGeneros: Метод sort() сортирует элементы массива arrayGeneros по алфавиту. 
+        let generoOption = document.createElement("option");
+        //
+        generoOption.setAttribute("value", genero.toLowerCase());
+        generoOption.textContent = genero;
+        document.querySelector("#s-genero").appendChild(generoOption);
+    });
+    //Перебор массива arrayGeneros с помощью forEach:
+
+    //Для каждого элемента genero создаётся новый тег <option>.Создание тега <option>:
+
+    //let generoOption = document.createElement("option"); создаёт новый элемент <option>.
+    //generoOption.setAttribute("value", genero.toLowerCase()); задаёт атрибут value в нижнем регистре:Например, для жанра "Drama":
+    // html <option value="drama"></option>
+
+
+
+}
+
+function clearCards() {
+    //Функция clearCards Очищает контейнер с карточками фильмов, удаляя все элементы с классом "card".может удалить лищнее
+
+    document.querySelectorAll(".card").forEach(card => card.remove());
+    //Этот код ищет все элементы с классом "card" с помощью document.querySelectorAll(".card").
+    // Используя метод forEach, он перебирает каждую найденную карточку и удаляет её с помощью card.remove().
+}
+
+doGetRequest(URL, processMovie);
+//Вызов функций doGetRequest и processMovie.doGetRequest(URL, processMovie):
+//doGetRequest —функция, которая выполняет HTTP-запрос на заданный URL.
+//Она принимает два аргумента:
+//URL — адрес, куда будет отправлен запрос.
+//processMovie — колбэк-функция, которая будет вызвана после успешного получения данных
